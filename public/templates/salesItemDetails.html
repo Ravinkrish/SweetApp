@@ -1,0 +1,112 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+
+
+<div class="container">
+    <div class="row">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#AddItmes">
+            ADD Item Details
+        </button>
+        <div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+                <span class="input-group-btn">
+			<button class="btn btn-default" type="button">Go!</button>
+		</span>
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+    <div class="container-fluid">
+        <table class="table table-bordered">
+            {{salesDetails}}
+            <thead>
+            <tr>
+                <th style="color:blue;">Number Of Coconut</th>
+                <th style="color:blue;">Number Of Batches</th>
+                <th style="color:blue;">Date Of Addition</th>
+                <th style="color:blue;">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr dir-paginate="sales in salesDetails|filter:searchtext|itemsPerPage:3">
+
+                <td style="color:tomato;">{{sales.numberOfCoconut}}</td>
+                <td style="color:tomato;">{{sales.numberOfBatches}}</td>
+                <td style="color:tomato;">{{sales.dateOfAddition}}</td>
+
+                <td style="color:tomato;">
+                    <!-- <button class="btn btn-success" data-toggle="modal" data-target="#Modal" ng-click="getSingleReceipt(receipt._id)">Edit</button>-->
+                    <button class="btn btn-danger" ng-click="deleteReceipt(receipt._id)">Delete</button>
+                    <!-- <button class="btn btn-danger" ng-click="deleteReceipt(receipt._id)">Add Items</button>-->
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+        <dir-pagination-controls class="paging" style="margin-left:450px;"
+                                 max-size="3"
+                                 direction-links="true"
+                                 boundary-links="true">
+        </dir-pagination-controls>
+    </div>
+</div>
+
+<div class="modal fade" id="AddItmes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Item Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Name</label>
+                        <input type="text" class="form-control" ng-model="salesItemDetails.name"
+                               placeholder="Number Of Coconuts">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Enter Number Of Trays </label>
+                        <input type="number" class="form-control" ng-model="salesItemDetails.numberOfTrays"
+                               placeholder="Number Of Batch">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Enter Number Of Packets </label>
+                        <input type="number" class="form-control" ng-model="salesItemDetails.numberOfPackets"
+                               placeholder="Number Of Packets">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Enter Item Cost </label>
+                        <input type="number" class="form-control" ng-model="salesItemDetails.itemCost"
+                               placeholder=" Item Cost">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="saveItemSalesDetails(salesItemDetails)">Save Details
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <button class="btn btn-danger" ng-click="saveItemSalesDetailsToDB()">saveItem SalesDetails To DB</button>
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+
+

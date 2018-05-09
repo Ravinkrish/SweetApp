@@ -1,0 +1,131 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="container">
+    <h1 style="margin-left:-30px;">ADD VENDOR</h1>
+    <div class="row">
+        <div class="col-sm">
+            <div class="row">
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">COMMODITY NAME</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" ng-model="vendorDetails.commodityName"
+                                   placeholder="Commodity Name"
+                                   required="required"/>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">PRODUCT QUANTITY</label>
+                        <div class="col-10">
+                            <input type="number" class="form-control" ng-model="vendorDetails.quantity"
+                                   placeholder="quantity" required="required"/>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">PRODUCT COST</label>
+                        <div class="col-10">
+                            <input type="number" class="form-control" ng-model="vendorDetails.cost" placeholder="cost"
+                                   required="required"/>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">VENDOR NAME</label>
+                        <div class="col-10">
+                            <input type="text" class="form-control" ng-model="vendorDetails.vendorName"
+                                   placeholder="vendorName" required="required"/>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">VENDOR LOCATION</label>
+                        <div class="col-10">
+
+                            <input type="text" class="form-control" ng-model="vendorDetails.vendorLocation"
+                                   placeholder="vendorLocation"
+                                   required="required"/>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">VENDOR ADDRESS</label>
+                        <div class="col-10">
+
+                            <input type="text" class="form-control" ng-model="vendorDetails.vendorAddress"
+                                   placeholder="vendorAddress"
+                                   required="required"/>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">VENDOR IN UNITS</label>
+                        <div class="col-10">
+                            <select type="text" class="form-control" ng-model="vendorDetails.units"
+                                    ng-options="x for x in names"
+                                    placeholder="vendorAddress"
+                                    required="required"/>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">DATE OF PURCHASE</label>
+                        <div class="col-10">
+                            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                                <input type="text" class="form-control" placeholder="dateOfPurchase" datetime-picker
+                                       ng-model="vendorDetails.dateOfPurchase" is-open="ctrl.picker6.open"
+                                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                       ng-init="ctrl.picker6.date"/>
+                                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div>
+                <button style="margin-left:-12px;" type="submit" ng-click="saveVendorDetails()"
+                        class="btn btn-primary btn-block btn-large">Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'../templates/footer.html'"></div>

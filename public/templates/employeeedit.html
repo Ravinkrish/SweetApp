@@ -1,0 +1,144 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="login">
+    <div class="container">
+        <div class="row">
+            <img src="{{employee.employeePhoto}}"
+                 style="height:200px; width:200px; border-radius:30px; margin-left:480px;" class="card-img-top"/>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6" style="padding-right: 38px;">
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">EMPLOYEE NAME</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" ng-model="employee.name"
+                                       placeholder="Employee Name" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">EMPLOYEE ADDRESS</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" ng-model="employee.address"
+                                       placeholder="Employee Address" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">EMPLOYEE CITY</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" ng-model="employee.city"
+                                       placeholder="city" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">POSTAL CODE</label>
+                            <div class="col-10">
+                                <input type="number" class="form-control" ng-model="employee.postalCode"
+                                       placeholder="postalCode" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">MOBILE NUMBER</label>
+                            <div class="col-10">
+                                <input type="number" class="form-control" ng-model="employee.mobileNumber"
+                                       placeholder="mobileNumber" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">ANNUAL ADVANCE</label>
+                            <div class="col-10">
+                                <input type="number" class="form-control" ng-model="employee.annualAdvance"
+                                       placeholder="AnnualAdvance" required="required"/>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">ALTERNATE MOBILE NUMBER</label>
+                            <div class="col-10">
+                                <input type="number" class="form-control" ng-model="employee.alternateNumber"
+                                       placeholder="alternateNumber" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">MONTHLY SALARY</label>
+                            <div class="col-10">
+                                <input type="number" class="form-control" ng-model="employee.monthlySalary"
+                                       placeholder="monthlySalary" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">DATE OF JOINING</label>
+                            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                                <input type="text" class="form-control" placeholder="dateOfJoining" datetime-picker
+                                       ng-model="employee.dateOfJoining" is-open="ctrl.picker6.open"
+                                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                       ng-init="ctrl.picker6.date"/>
+                                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">DATE OF BIRTH</label>
+                            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                                <input type="text" class="form-control" placeholder="dateOfBirth" datetime-picker
+                                       ng-model="employee.dateOfbirth" is-open="ctrl.picker6.open"
+                                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                       ng-init="ctrl.picker6.date"/>
+                                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">EMPLOYEE ID</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" ng-model="employee.employeeId"
+                                       placeholder="Employee Name" required="required"/>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">DATE OF ANNUAL ADVANCE</label>
+                            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                                <input type="text" class="form-control" placeholder="dateofannualadvance" datetime-picker
+                                       ng-model="employee.dateOfAnnual" is-open="ctrl.picker6.open"
+                                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                       ng-init="ctrl.picker6.date"/>
+                                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" ng-click="updateEmployeeDetails()"
+                            class="btn btn-primary btn-block btn-large">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+

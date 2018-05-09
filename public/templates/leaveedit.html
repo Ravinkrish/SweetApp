@@ -1,0 +1,40 @@
+<div class="login">
+    <h1>Add Leaves</h1>
+    <form method="post">
+        <input type="text" name="u" ng-model="leave.employeeId" placeholder="EmployeeId" required="required"/>
+        <div class="form-group">
+            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                <input type="text" class="form-control" placeholder="Startdate" datetime-picker
+                       ng-model="leave.startDate" is-open="ctrl.picker6.open"
+                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                       ng-init="ctrl.picker6.date"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                <input type="text" class="form-control" placeholder="Enddate" datetime-picker ng-model="leave.endDate"
+                       is-open="ctrl.picker6.open"
+                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                       ng-init="ctrl.picker6.date"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <input type="text" name="p" ng-model="leave.reasonForLeave" placeholder="ReasonForLeave" required="required"/>
+        <button type="submit" ng-click="updateLeaveDetails()" class="btn btn-primary btn-block btn-large">Update
+        </button>
+    </form>
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+

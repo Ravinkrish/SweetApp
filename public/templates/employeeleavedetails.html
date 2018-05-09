@@ -1,0 +1,113 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div id="OrderPackages_1" class="table-responsive">
+                    <table id="tableSearchResults" class="table color-bordered-table primary-bordered-table ">
+                        <thead>
+                        <tr>
+                            <th style="color:tomato;">EmployeeID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr id="package_{{$index}}" class="accordion-toggle" data-toggle="collapse"
+                            data-target=" .chimpance">
+                            <td style="color:white; border-left-style:double; border-right-style:double;">
+                                {{employee.employeeId}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="hiddenRow" data-parent="#OrderPackages_1">
+                                <div class="accordion-body collapse chimpance" id="accordion1">
+
+                                    <div id="OrderPackagess" class="table-responsive">
+                                        <table id="tableSarchResults"
+                                               class="table color-bordered-table primary-bordered-table">
+                                            <thead>
+                                            <tr>
+                                                <th style="border-right-style:ridge; background-color:tomato;">Month
+                                                </th>
+                                                <th style="border-right-style:ridge; background-color:tomato;">Total
+                                                    number of days
+                                                </th>
+                                                <th style="border-right-style:ridge; background-color:tomato;">Balance
+                                                    Amount
+                                                </th>
+                                                <!--<th>hyiyiyiyiy</th>-->
+                                            </tr>
+                                            </thead>
+                                            <tbody ng-repeat="leave in leavePayments">
+                                            <tr id="package11" class="accordion-toggle" data-toggle="collapse"
+                                                data-parent="OrderPackages" data-target=".emp{{leave._id}}">
+                                                <td style="border-right-style:ridge;">{{leave._id}}</td>
+                                                <td style="border-right-style:ridge;">{{leave.totalDays}}</td>
+                                                <td>
+                                                    {{leave.finalPayment}}
+
+                                                </td>
+                                                <!--<td><button class="btn-themecolor">Edit</button></td>-->
+                                                <!--<td><i class="fa fa-spin fa-hand-o-up waves-effect"></i></td>-->
+                                            </tr>
+                                            <tr>
+
+                                                <td colspan="3" class="hiddenRow">
+                                                    <div class="accordian-body collapse table-responsive emp{{leave._id}}"
+                                                         id="accordion11">
+                                                        <table class="table color-bordered-table success-bordered-table">
+                                                            <thead>
+                                                            <tr>
+                                                                <!--<th>{{subs.subCategoryid+sub.categoryId+subs.subCategoryid}}</th>-->
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    StartDate
+                                                                </th>
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    EndDate
+                                                                </th>
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    Reason for Leave
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr ng-repeat="lea in leave.data" class="kikikiki">
+                                                                <td style="border-right-style:ridge;">
+                                                                    {{lea.startDate}}
+                                                                </td>
+                                                                <td style="border-right-style:ridge;">{{lea.endDate}}
+                                                                </td>
+                                                                <td style="border-right-style:ridge;">
+                                                                    {{lea.reasonForLeave}}
+                                                                </td>
+                                                                <!--<td><button class="btn-themecolor">Edit</button></td>-->
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+
+
+
+
+

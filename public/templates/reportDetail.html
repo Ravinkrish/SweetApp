@@ -1,0 +1,183 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<!--<button style="margin-left:380px;" class="btn btn-primary" ui-sref="report" type="button">ADD NEW CLIENT</button>-->
+<br/><br/>
+<div class="container">
+
+    <table class="table table-bordered">
+        <thead>
+       <!-- <th>{{report._id}}</th>-->
+        <tr>
+            <th>PRODUCTS</th>
+            <th>COST</th>
+            <th>NO OF PACKETS</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="(key,value) in report.product">
+            <td>{{key}}</td>
+            <td>{{value}}</td>
+            <td><input type="number" id="bigpackets" ng-model="ordersettings.cost[key]"></td>
+            <td>{{value * ordersettings.cost[key] }}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+    <div class="row">
+        <span class="col-sm-4">
+             <div class="form-group">
+        <label class="col-form-label">DATE OF PURCHASE:
+        </label>
+        <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+            <input type="text" class="form-control" datetime-picker ng-model="ordersettings.dateOfPurchase"
+                   is-open="ctrl.picker6.open"
+                   ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                   ng-init="ctrl.picker6.date"/>
+            <span class="input-group-btn">
+									<button type="button" class="btn btn-default"
+                                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                                            class="glyphicon glyphicon-calendar"></span>
+									</button>
+									</span>
+        </div>
+    </div>
+        </span>
+        <span class="col-sm-4">
+            <div>Gst Percentage</div>
+        <div><input type="number" id="gst" ng-model="gstPercentage"></div>
+        </span>
+        <span class="col-sm-4">
+           <div>Package Cost</div>
+        <div><input type="number" id="packageCost" ng-model="packageCost"></div>
+        </span>
+
+    </div>
+    <br>
+    <div class="row">
+        <span class="col-sm-4"><input placeholder="TOTAL:" type="number" ng-model="total" readonly id="total"></span>
+        <span class="col-sm-4"><input placeholder="AMOUNT PAID:" type="number" ng-model="amountPaid" id="paid"></span>
+        <button type="button" ng-click="saveOrderSettings(0)" class="btn btn-primary"> SHOW BILL</button>
+        <button type="button" ng-click="saveOrderSettings(1)" class="btn btn-primary"> SUBMIT</button>
+        <!--<button type="button" ui-sref="query({reportId:order._Id})" class="btn btn-primary">QUERY</button>-->
+    </div>
+
+
+</div>
+
+<br/><br/>
+<h2 style="margin-left:500px;">CLIENT PURCHASE DETAILS:</h2>
+<div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>DATE</th>
+            <th>TOTAL</th>
+            <th>REMAINING</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="orders in order|filter:searchtext|itemsPerPage:3">
+            <td>{{orders.dateOfPurchase |  date:'dd/MM/yyyy'}}</td>
+            <td>{{orders.total}}</td>
+            <td>{{orders.balanceAmount}}
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" data-ng-click="deleteOrder(orders)" >DELETE</button>
+                <button type="button" class="btn btn-danger"data-toggle="modal" data-target="#payMoneyModel"   data-ng-click="setOrderBalance(orders)" >PAY KNOW</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Modal" ng-click="gettingSingleOrder(orders._id)">VIEW BILL</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class="paging" style="margin-left:450px;"
+                             max-size="3"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+<div class="modal fade" id="payMoneyModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pay Balance</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">REMAINING AMOUNT:</label>
+                        <input type="text" class="form-control" ng-model="balancePaid" id="recipient-name">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="payBalance(balancePaid)">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="product">PURCHASE DETAILS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <table class="table table-bordered">
+                        <thead>
+                        <!-- <th>{{report._id}}</th>-->
+                        <tr>
+                            <th>PRODUCTS</th>
+                            <th>COST</th>
+                            <!--<th>NO OF PACKETS</th>-->
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(key,value) in report.product">
+                            <td>{{key}}</td>
+                            <td>{{value}}</td>
+                            <!--<td><input type="number" id="bigpackets" ng-model="ordersettings.cost[key]"></td>-->
+                            <!--<td ng-repeat="(key,value) in orderSettings.cost">{{value}}</td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>NO OF PACKETS</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="(key,value) in orderSettings.cost">
+                            <td>{{value}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div ng-include="'../templates/footer.html'"></div>-->
+
+
+

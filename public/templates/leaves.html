@@ -1,0 +1,83 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+
+<div class="login">
+    <h1 style="margin-left:550px;">Add Leaves</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">EMPLOYEE ID</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" ng-model="employee.employeeId"
+                                       placeholder="alternateNumber" required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">EMPLOYEE NAME</label>
+                            <div class="col-10">
+                                <input type="text" class="form-control" ng-model="employee.name"
+                                       placeholder="monthlySalary" required="required"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">StartDate</label>
+                            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                                <input type="date" class="form-control" placeholder="StartDate" datetime-picker
+                                       ng-model="leaves.startDate" is-open="ctrl.picker6.open"
+                                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                       ng-init="ctrl.picker6.date"/>
+                                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">EndDate</label>
+                            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                                <input type="date" class="form-control" placeholder="endDate" datetime-picker
+                                       ng-model="leaves.endDate" is-open="ctrl.picker6.open"
+                                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                       ng-init="ctrl.picker6.date"/>
+                                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">ReasonForLeave</label>
+                            <div class="col-10">
+                                <textarea class="form-control" rows="5" id="comment" ng-model="leaves.reasonForLeave"></textarea>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div>
+                    <button style="margin-left:-15px;" type="submit" ng-click="saveLeaveDetails()"
+                            class="btn btn-primary btn-block btn-large">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+
+
+
+

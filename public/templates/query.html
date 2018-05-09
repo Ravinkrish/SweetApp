@@ -1,0 +1,83 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="container-fluid">
+<div class="modal-body">
+    <label class="col-6">Query Vendor Details</label>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-sm-4" >
+            <div class="form-group">
+            <label class="col-2 col-form-label">STARTDATE</label>
+            <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                <input type="text" class="form-control" placeholder="dateOfJoining" datetime-picker
+                       ng-model="dateDetails.startDate" is-open="ctrl.picker6.open"
+                       ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                       ng-init="ctrl.picker6.date"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+        </div>
+        <div class="col-sm-4" >
+            <div class="form-group">
+                <label class="col-2 col-form-label">ENDDATE</label>
+                <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                    <input type="text" class="form-control" placeholder="dateOfJoining" datetime-picker
+                           ng-model="dateDetails.endDate" is-open="ctrl.picker6.open"
+                           ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                           ng-init="ctrl.picker6.date"/>
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-4" >
+            <button style="margin-top: 39px;" ng-click="saveDateDetails()" type="button" class="btn btn-primary">SUBMIT</button>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<br/><br/>
+<div style="color:black;">TOTAL------------------->{{totalCost[0].sum}}</div>
+<div class="container-fluid">
+    <table class="table table-bordered">
+
+        <thead>
+        <tr>
+           <!-- {{totalCost}}
+            {{reportList}}-->
+            <th style="color:black;">commodityName</th>
+            <th style="color:black;">quantity</th>
+            <th style="color:black;">cost</th>
+            <th style="color:black;">dateOfPurchase</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="orders in reportList|filter:searchtext|itemsPerPage:3">
+            <td style="color:tomato;">{{orders.commodityName}}</td>
+            <td style="color:tomato;">{{orders.quantity}}</td>
+            <td style="color:tomato;">{{orders.cost}}</td>
+            <td style="color:tomato;">{{orders.dateOfPurchase|  date:'dd/MM/yyyy'}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class="paging" style="margin-left:800px;"
+                             max-size="3"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+</div><div ng-include="'../templates/footer.html'"></div>

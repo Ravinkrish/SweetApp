@@ -1,0 +1,49 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="container">
+    <h2 style="color:white;">Vendor Details</h2>
+    <button type="button" class="btn btn-primary" ui-sref="vendors">ADD NEW VENDOR</button>
+    <div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+        </div>
+    </div>
+    <br/><br/>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>COMMODITY NAME</th>
+            <th>QUANTITY</th>
+            <th>COST</th>
+            <th>TOTALCOST</th>
+            <th>VENDORNAME</th>
+            <th>DATEOFPURCHASE</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="vendor in vendorList|filter:searchtext|itemsPerPage:10">
+            <td style="color:tomato;">{{vendor.commodityName}}</td>
+            <td style="color:tomato;">{{vendor.quantity}}</td>
+            <td style="color:tomato;">{{vendor.cost}}</td>
+            <td style="color:tomato;">{{vendor.cost*vendor.quantity}}</td>
+            <td style="color:tomato;">{{vendor.vendorName}}</td>
+            <td style="color:tomato;">{{vendor.dateOfPurchase |  date:'dd/MM/yyyy'}}</td>
+
+            <td style="color:tomato;">
+
+                <button type="button" class="btn btn-danger" ng-click="deleteVendor(vendor._id)">delete</button>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class="paging" style="margin-left:450px;"
+                             max-size="3"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+
+

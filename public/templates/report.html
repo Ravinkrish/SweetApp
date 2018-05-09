@@ -1,0 +1,143 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+
+<button style="margin-left:390px;" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#exampleModal">ADD CLIENT
+</button>
+
+<div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+    <div class="input-group">
+        <input style="margin-left:-52px;" type="text" class="form-control" placeholder="Search for..."
+               ng-model="searchtext">
+    </div>
+</div>
+
+<div class="mystyle" style="margin-left:1000px;"  export-table>
+    <button data-ng-click="exportAction('csv')"class="w3-button btn btn-primary w3-indigo">CSV</button>
+    <button data-ng-click="exportAction('excel')"class="w3-button btn btn-primary w3-indigo">Excel</button>
+    <button data-ng-click="exportAction('doc')"class="w3-button btn btn-primary w3-indigo"> Doc</button>
+    <button data-ng-click="exportAction('pdf')"class="w3-button btn btn-primary w3-indigo">Pdf</button><br><br>
+</div>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr >
+            <th>NAME</th>
+            <th>PHONE</th>
+            <th>GST NUMBER</th>
+            <th ng-repeat="(key,value) in reportList[0].product">{{key}}</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="report in reportList|filter:searchtext|itemsPerPage:5">
+            <td>{{report.name}}</td>
+            <td>{{report.phone}}</td>
+            <td>{{report.gstNumber}}</td>
+            <td ng-repeat="(key,value) in report.product">{{value}}</td>
+            <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal"
+                        ng-click="getSingleReport(report._id)">EDIT
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="deleteReport(report._id)">DELETE</button>
+                <button type="button" class="btn btn-danger" ui-sref="reportDetail({reportId:report._id})">GENERATE
+                    ORDER
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class="paging" style="margin-left:450px;"
+                             max-size="3"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">ADD CLIENT DETAILS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">NAME:</label>
+                        <input type="text" class="form-control" id="recipient-name" ng-model="reportSettings.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-phone" class="col-form-label">PHONE:</label>
+                        <input type="number" class="form-control" id="recipient-phone" ng-model="reportSettings.phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-gst" class="col-form-label">GST NUMBER:</label>
+                        <input type="number" class="form-control" id="recipient-gst"
+                               ng-model="reportSettings.gstNumber">
+                    </div>
+                    <div class="form-group" ng-repeat="product in productList">
+                        <label class="col-form-label">{{product.productName}}:</label>
+                        <input type="number" class="form-control" ng-model="reportSettings.product[product.productName]">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" data-dismiss="modal" ng-click="saveReportSettings()" class="btn btn-primary">save
+                    details
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="client">UPDATE CLIENT DETAILS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">NAME:</label>
+                        <input type="text" class="form-control" id="recipient-name" ng-model="report.name">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-phone" class="col-form-label">PHONE:</label>
+                        <input type="number" class="form-control" id="recipient-phone" ng-model="report.phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-gst" class="col-form-label">GST NUMBER:</label>
+                        <input type="number" class="form-control" id="recipient-gst" ng-model="report.gstNumber">
+                    </div>
+                    <div class="form-group" ng-repeat="product in productList">
+                        <label class="col-form-label">{{product.productName}}:</label>
+                        <input type="number" class="form-control" ng-model="report.product[product.productName]">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" data-dismiss="modal" ng-click="updateReport()" class="btn btn-primary">Update
+                    details
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+
+
+

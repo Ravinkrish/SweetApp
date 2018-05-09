@@ -1,0 +1,208 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="container">
+    <div class="row">
+        <button style="margin-left:30px;" class="btn btn-primary" data-toggle="modal" data-target="#AddSales">
+            ADD Daily Sales Details
+        </button>
+        <div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+                <span class="input-group-btn">
+			<button class="btn btn-default" type="button">Go!</button>
+		</span>
+            </div>
+        </div>
+    </div>
+  </div>
+
+<div class="mystyle" style="margin-left:1000px;"  export-table>
+    <button data-ng-click="exportAction('csv')"class="w3-button btn btn-primary w3-indigo">CSV</button>
+    <button data-ng-click="exportAction('excel')"class="w3-button btn btn-primary w3-indigo">Excel</button>
+    <button data-ng-click="exportAction('doc')"class="w3-button btn btn-primary w3-indigo"> Doc</button>
+    <button data-ng-click="exportAction('pdf')"class="w3-button btn btn-primary w3-indigo">Pdf</button><br><br>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card">
+
+                <div id="OrderPackages_1" class="table-responsive">
+
+                    <table id="tableSearchResults" class="table color-bordered-table primary-bordered-table ">
+                        <tbody>
+
+                        <div class="panel panel-default">
+                            <tr id="package_{{$index}}" class="accordion-toggle" data-toggle="collapse"
+                                data-target=" .chimpance">
+                                <td style="color:tomato; border: solid 2px black;">
+                                  DAILY SALES DETAILS
+                                </td>
+                            </tr>
+                        </div>
+
+
+                        <tr>
+                            <td colspan="3" class="hiddenRow" data-parent="#OrderPackages_1">
+                                <div class="accordion-body collapse chimpance" id="accordion1">
+
+                                    <div id="OrderPackagess" class="table-responsive">
+                                        <table id="tableSarchResults"
+                                               class="table color-bordered-table primary-bordered-table">
+                                            <thead>
+                                            <tr>
+                                                <th style="border-right-style:ridge; background-color:tomato;">numberOfCoconut
+                                                </th>
+                                                <th style="border-right-style:ridge; background-color:tomato;">dateOfAddition
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody dir-paginate="sales in salesDetails|filter:searchtext|itemsPerPage:5">
+                                            <tr id="package11" class="accordion-toggle" data-toggle="collapse"
+                                                data-parent="OrderPackages" data-target=".emp{{advance._id}}">
+                                                <td style="border-right-style:ridge;">{{sales.numberOfCoconut}}</td>
+                                                <td style="border-right-style:ridge;">{{sales.dateOfAddition}}</td>
+
+
+                                            </tr>
+                                            <tr>
+
+                                                <td colspan="3" class="hiddenRow">
+                                                    <div class="accordian-body collapse table-responsive emp{{advance._id}}"
+                                                         id="accordion11">
+                                                        <table class="table color-bordered-table success-bordered-table">
+                                                            <thead>
+                                                            <tr>
+                                                                <!--<th>{{subs.subCategoryid+sub.categoryId+subs.subCategoryid}}</th>-->
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    productName
+                                                                </th>
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    noOfTrays
+                                                                </th>
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    noOfPices
+                                                                </th>
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    costPerPiece
+                                                                </th>
+                                                                <th style="border-right-style:ridge; background-color:coral;">
+                                                                    TotalCostOfDay
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tr ng-repeat="product in sales.product|filter:searchtext" class="kikikiki">
+                                                                <td style="border-right-style:ridge;">
+                                                                    {{product.productName}}
+                                                                </td>
+                                                                <td style="border-right-style:ridge;">
+                                                                    {{product.noOfTrays}}
+                                                                </td>
+                                                                <td style="border-right-style:ridge;">
+                                                                    {{product.noOfPices}}
+                                                                </td>
+                                                                <td style="border-right-style:ridge;">
+                                                                    {{product.costPerPiece}}
+                                                                </td>
+                                                                <td style="border-right-style:ridge;">
+                                                                    {{product.TotalCostOfDay}}
+                                                                </td>
+
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <dir-pagination-controls class="paging" style="margin-left:450px;"
+                                                                 max-size="5"
+                                                                 direction-links="true"
+                                                                 boundary-links="true">
+                                        </dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="AddSales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Daily Sales Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Enter Number Of Coconuts </label>
+                        <input type="text" class="form-control" ng-model="dailySalesDetails.numberOfCoconut"
+                               placeholder="Number Of Coconuts">
+                    </div>
+
+                   <!-- <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Enter Number Of Batch </label>
+                        <input type="text" class="form-control" id="recipient-name"
+                               ng-model="dailySalesDetails.numberOfBatches"
+                               placeholder="Number Of Batch">
+                    </div>
+-->
+
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">Date Of Addition</label>
+                        <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                            <input type="text" class="form-control" placeholder="Date Of Addition" datetime-picker
+                                   ng-model="dailySalesDetails.dateOfAddition" is-open="ctrl.picker6.open"
+                                   ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                   ng-init="ctrl.picker6.date"/>
+                            <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-repeat="product in productList">
+                        <label class="col-form-label">{{product.productName}}:</label>
+                        <input type="number" class="form-control" ng-model="dailySalesDetails.product[product.productName]">
+                    </div>
+                    <div ng-repeat="item in items">
+                        {{item.trays}}
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        ng-click="saveCoconutSalesDetails(dailySalesDetails)">Save Details
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'../templates/footer.html'"></div>
+
+
+

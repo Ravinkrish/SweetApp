@@ -1,0 +1,179 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="modal fade" id="settingview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Receipt Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">RECEIPT NAME</label>
+                        <input type="text" class="form-control" id="recipient-name"
+                               ng-model="receiptDetails.receiptName">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">DATE OF JOINING</label>
+                        <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                            <input type="text" class="form-control" placeholder="dateOfJoining" datetime-picker
+                                   ng-model="receiptDetails.date" is-open="ctrl.picker6.open"
+                                   ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                   ng-init="ctrl.picker6.date"/>
+                            <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="recipient-description" class="col-form-label">DESCRIPTION</label>
+                        <input type="text" class="form-control" id="recipient-description"
+                               ng-model="receiptDetails.description">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-control-label">UPLOAD LOGO:</label>
+                        <input type="file" ng-model="file" name="file" base-sixty-four-input required onload="onLoad"
+                               maxsize="500" accept="image/*">
+
+                    </div>
+
+
+                </form>
+                <button type="button" style="margin-left: 220px;margin-top: -47px;" class="btn btn-primary"
+                        ng-click="uploadfile(file)">Upload
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveReceiptDetails()">Save
+                    Receipt
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="receipts">Update Receipt Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">RECEIPT NAME</label>
+                        <input type="text" class="form-control" id="recipient-name" ng-model="receipt.receiptName">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-2 col-form-label">DATE OF JOINING</label>
+                        <div class="input-group" ng-controller="dateandtimepicCtrl as ctrl">
+                            <input type="text" class="form-control" placeholder="dateOfJoining" datetime-picker
+                                   ng-model="receipt.date" is-open="ctrl.picker6.open"
+                                   ng-change="dateAndTime(ctrl.picker6.date);changingDateValue(ctrl.picker6.date)"
+                                   ng-init="ctrl.picker6.date"/>
+                            <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" style="margin-top:0px;"
+                            ng-click="ctrl.openCalendar($event, 'picker6')"><span
+                            class="glyphicon glyphicon-calendar"></span>
+                    </button>
+                </span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="recipient-description" class="col-form-label">DESCRIPTION</label>
+                        <input type="text" class="form-control" id="recipient-description"
+                               ng-model="receipt.description">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-control-label">UPLOAD LOGO:</label>
+                        <input type="file" ng-model="file" name="file" base-sixty-four-input required onload="onLoad"
+                               maxsize="500" accept="image/*">
+                        <button type="button" style="margin-left: 220px;margin-top: -47px;" class="btn btn-primary"
+                                ng-click="uploadfile(file)">Upload
+                        </button>
+                        <!--<input type="text" class="form-control" id="recipient-logo" ng-model="CandidateDetailsdata.CandidateLogo">-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateReceipt()">Update
+                    Receipt
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button style="margin-left:15px;" class="btn btn-primary" data-toggle="modal" data-target="#settingview">
+    ADD RECEIPTS
+</button>
+<div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+        <span class="input-group-btn">
+			<button class="btn btn-default" type="button">Go!</button>
+		</span>
+    </div>
+</div>
+
+<br/><br/>
+<div class="container-fluid">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="color:black;">RECEIPT NAME</th>
+            <th style="color:black;">DATE</th>
+            <th style="color:black;">DESCRIPTION</th>
+            <th style="color:black;">DOCUPLOADED</th>
+            <th style="color:black;">ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="receipt in receiptList|filter:searchtext|itemsPerPage:3">
+            <td style="color:tomato;">{{receipt.receiptName}}</td>
+            <td style="color:tomato;">{{receipt.date |  date:'dd/MM/yyyy'}}</td>
+            <td style="color:tomato;">{{receipt.description}}</td>
+            <td style="color:tomato;"><img style="height:50px;width:50px;"
+                                           src="data:image/jpeg;base64,{{receipt.docUpload}}"></td>
+            <td style="color:tomato;">
+                <button class="btn btn-success" data-toggle="modal" data-target="#Modal"
+                        ng-click="getSingleReceipt(receipt._id)">Edit
+                </button>
+                <button class="btn btn-danger" ng-click="deleteReceipt(receipt._id)">Delete</button>
+            </td>
+            <!--<td style="color:tomato;">{{employee.salaryInAdvance}}</td>-->
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class="paging" style="margin-left:800px;"
+                             max-size="3"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+<div ng-include="'../templates/footer.html'"></div>
+

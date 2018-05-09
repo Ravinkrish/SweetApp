@@ -1,0 +1,71 @@
+<div ng-include="'../templates/navHeader.html'"></div>
+
+<div class="login">
+    <div class="container">
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1 style="text-align: center">REGISTER</h1>
+            <br>
+            <div class="form-group ">
+                <label class="col-2 col-form-label">FIRST NAME</label>
+                <div class="col-4">
+                    <input type="text" class="form-control" ng-model="user.firstName"
+                           placeholder="Enter First Name" required="required"/>
+
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="col-2 col-form-label">LAST NAME</label>
+                <div class="col-4">
+                    <input type="text" class="form-control" ng-model="user.lastName"
+                           placeholder="Enter Last Name" required="required"/>
+
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="col-2 col-form-label">USER NAME</label>
+                <div class="col-4">
+                    <input type="text" class="form-control" ng-model="user.userName"
+                           placeholder="Enter User Name" required="required"/>
+
+                </div>
+            </div>
+            <div class="form-group ">
+                <label class="col-2 col-form-label">PASSWORD</label>
+                <div class="col-4">
+                    <input type="text" class="form-control" ng-model="user.password"
+                           placeholder="Enter Password" required="required"/>
+
+                </div>
+            </div>
+
+
+            <button type="submit" ng-click="saveUserDetails()" ng-disabled="!isValidForm()"
+                    class="btn btn-primary btn-block btn-large">Submit.
+            </button>
+
+        </div>
+    </div>
+
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+
+
+<!--
+<div class="login">
+    <h1>REGISTER</h1>
+    <form method="post">
+        <input type="text" name="u" ng-model="user.firstName" placeholder="Firstname" required="required"/>
+        <input type="text" name="p" ng-model="user.lastName" placeholder="Lastname" required="required"/>
+        <input type="text" name="u" ng-model="user.userName" placeholder="Username" required="required"/>
+        <input type="password" name="p" ng-model="user.password" placeholder="Password" required="required"/>
+        <button type="submit" ng-click="saveUserDetails()" ng-disabled="!isValidForm()"
+                class="btn btn-primary btn-block btn-large">Submit.
+        </button>
+    </form>
+</div-->>

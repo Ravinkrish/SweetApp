@@ -1,0 +1,134 @@
+<div ng-include="'../templates/navHeaderWIthOptions.html'"></div>
+<div class="modal fade" id="settingview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Product Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label for="product-name" class="col-form-label">PRODUCT NAME:</label>
+                        <input type="text" class="form-control" id="product-name" ng-model="productDetails.productName">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="product-description" class="col-form-label">PRODUCT DESCRIPTION:</label>
+                        <textarea class="form-control" rows="5" id="product-description"
+                                  ng-model="productDetails.productDescription"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-cost" class="col-form-label">COST PER PRODUCT:</label>
+                        <input type="number" class="form-control" id="product-cost"
+                               ng-model="productDetails.costPerProduct">
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveProductDetails()">Save
+                    Product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="receipts">Update product Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">PRODUCT NAME</label>
+                        <input type="text" class="form-control" id="recipient-name" ng-model="product.productName">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="recipient-description" class="col-form-label">PRODUCT DESCRIPTION</label>
+                        <input type="text" class="form-control" id="recipient-description"
+                               ng-model="product.productDescription">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipient-cost" class="col-form-label">COST PER PRODUCT</label>
+                        <input type="number" class="form-control" id="recipient-cost" ng-model="product.costPerProduct">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateProduct()">Update
+                    product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button style="margin-left:15px;" class="btn btn-primary" data-toggle="modal" data-target="#settingview">
+    ADD PRODUCTS
+</button>
+<div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+        <span class="input-group-btn">
+			<button class="btn btn-default" type="button">Go!</button>
+		</span>
+    </div>
+</div>
+
+<br/><br/>
+<div class="container-fluid">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="color:black;">PRODUCT NAME</th>
+            <th style="color:black;">PRODUCT DESCRIPTION</th>
+            <th style="color:black;">COST PER PRODUCT</th>
+            <th style="color:black;">ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="product in productList|filter:searchtext|itemsPerPage:3">
+            <td style="color:tomato;">{{product.productName}}</td>
+            <td style="color:tomato;">{{product.productDescription}}</td>
+            <td style="color:tomato;">{{product.costPerProduct}}</td>
+            <td style="color:tomato;">
+                <button class="btn btn-success" data-toggle="modal" data-target="#Modal"
+                        ng-click="getSingleProduct(product._id)">Edit
+                </button>
+                <button class="btn btn-danger" ng-click="deleteProduct(product._id)">Delete</button>
+            </td>
+            <!--<td style="color:tomato;">{{employee.salaryInAdvance}}</td>-->
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class="paging" style="margin-left:800px;"
+                             max-size="3"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
+

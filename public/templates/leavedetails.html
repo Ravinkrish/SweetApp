@@ -1,0 +1,43 @@
+<div class="container">
+    <h2 style="color:white;">Leave Details</h2>
+    <button type="button" class="btn btn-primary" ui-sref="leaves">ADD NEW</button>
+    <div class="col-md-3 col-sm-3 col-xs-8 form-group pull-right top_search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="searchtext">
+        </div>
+    </div>
+    <br/><br/>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th style="color:white;">EmployeeId</th>
+            <th style="color:white;">StartDate</th>
+            <th style="color:white;">EndDate</th>
+            <th style="color:white;">Noofdays</th>
+            <th style="color:white;">Reasonforleave</th>
+            <th style="color:white;">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr dir-paginate="leave in leaveList|filter:searchtext|itemsPerPage:3">
+            <td style="color:tomato;">{{leave.employeeId}}</td>
+            <td style="color:tomato;">{{leave.startDate}}</td>
+            <td style="color:tomato;">{{leave.endDate}}</td>
+            <td style="color:tomato;">{{leave.noOfDays}}</td>
+            <td style="color:tomato;">{{leave.reasonForLeave}}</td>
+            <td style="color:tomato;">
+                <button type="button" class="btn btn-link" ui-sref="leaveedit({leaveId:leave._id})">edit</button>
+                <button type="button" class="btn btn-primary" ng-click="deleteLeave(leave._id)">delete</button>
+                <!--<button type="button" class="btn btn-primary">view</button>-->
+                <!--<button type="button" class="btn btn-primary" ui-sref="leaves" data-toggle="modal" data-target="#exampleModal">Add Leave Details</button>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls class="paging" style="margin-left:450px;"
+                             max-size="3"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+<div ng-include="'../templates/footer.html'"></div>

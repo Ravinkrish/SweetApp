@@ -1,0 +1,44 @@
+<div ng-include="'../templates/navHeader.html'"></div>
+<div class="login">
+    <div class="container">
+        <div class="row">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1 style="text-align: center">WELCOME</h1>
+            <br>
+            <form method="post">
+                <div class="form-group ">
+                    <label class="col-2 col-form-label">USER NAME</label>
+                    <div class="col-4">
+                        <input type="text" class="form-control" ng-model="login.userName"
+                               placeholder="Enter User Name" required="required"/>
+
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <label class="col-2 col-form-label">PASSWORD</label>
+                    <div class="col-4">
+                        <input type="password" class="form-control" ng-model="login.password"
+                               placeholder="Enter Password" required="required"/>
+
+                    </div>
+                </div>
+                <!-- ng-disabled="!isValidForm()"-->
+                <button type="submit" ng-click="LoginDetails()"
+
+                        class="btn btn-primary btn-block btn-large">Login
+                </button>
+
+            </form>
+
+
+        </div>
+    </div>
+
+</div>
+
+<div ng-include="'../templates/footer.html'"></div>
